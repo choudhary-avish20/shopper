@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:shopper/global_variables.dart';
+import 'package:shopper/product_card.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
-  final List<String> filter = const ['Samsung', 'Google', 'Apple', 'Xiaomi'];
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<String> filters = const ['Samsung', 'Google', 'Apple', 'Xiaomi'];
+  late String selectedFilter;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedFilter = filters[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +32,17 @@ class HomePage extends StatelessWidget {
             Row(
               children: [
                 const Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.fromLTRB(20.0, 20, 20, 0),
                   child: Text(
-                    "helloo\noooooo",
-                    style: TextStyle(fontWeight: FontWeight(700), fontSize: 40),
+                    "Phone\nStore",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      hint: Text("Search here"),
-                      prefixIcon: Icon(Icons.search),
+                      hintText: "Search here",
+                      prefixIcon: const Icon(Icons.search),
                       border: border,
                       enabledBorder: border,
                       focusedBorder: border,
@@ -40,17 +55,48 @@ class HomePage extends StatelessWidget {
               height: 120,
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  final label = filter[index];
+                  final label = filters[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10.0,
                       vertical: 0,
                     ),
-                    child: Chip(label: Text(label)),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedFilter = label;
+                        });
+                      },
+                      child: Chip(
+                        label: Text(label),
+                        backgroundColor: selectedFilter == label
+                            ? Theme.of(context).colorScheme.primary
+                            : Color.fromRGBO(245, 248, 237, 1),
+                        side: BorderSide(
+                          color: Color.fromRGBO(245, 243, 250, 1),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                    ),
                   );
                 },
-                itemCount: filter.length,
+                itemCount: filters.length,
                 scrollDirection: Axis.horizontal,
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: product.length,
+                itemBuilder: (context, index) {
+                  final pro = product[index];
+                  return ProductCard(
+                    price: pro['price'] as int,
+                    title: pro['title'] as String,
+                    img: pro['image_url'] as String,
+                  );
+                },
               ),
             ),
           ],
