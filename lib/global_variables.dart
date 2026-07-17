@@ -1,7 +1,7 @@
-final product = [
+final products = [
   {
     'id': 0,
-    'title': "phone 1",
+    'title': "Phone 1",
     'brand': 'nothing',
     'price': 300,
     'specs': ['8/128', '8/256', '12/256'],
@@ -9,7 +9,7 @@ final product = [
   },
   {
     'id': 1,
-    'title': "phone 2",
+    'title': "Phone 2",
     'brand': 'nothing',
     'price': 350,
     'specs': ['8/128', '8/256', '12/256'],
@@ -17,7 +17,7 @@ final product = [
   },
   {
     'id': 2,
-    'title': "phone 3",
+    'title': "Phone 3",
     'brand': 'nothing',
     'price': 400,
     'specs': ['8/128', '12/256', '16/512'],
@@ -25,7 +25,7 @@ final product = [
   },
   {
     'id': 3,
-    'title': "phone 4a",
+    'title': "Phone 4a",
     'brand': 'nothing',
     'price': 69,
     'specs': ['8/128', '8/256'],

@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> filters = const ['Samsung', 'Google', 'Apple', 'Xiaomi'];
+  final List<String> filters = const ['2022', '2023', '2025', '2026'];
   late String selectedFilter;
 
   @override
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     const border = OutlineInputBorder(
-      borderSide: BorderSide(color: Color.fromRGBO(225, 225, 225, 1)),
+      borderSide: BorderSide(color: Color.fromRGBO(220, 220, 220, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
     );
     return Scaffold(
@@ -31,18 +31,18 @@ class _HomePageState extends State<HomePage> {
           children: [
             Row(
               children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(20.0, 20, 20, 0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20.0, 20, 20, 0),
                   child: Text(
                     "Phone\nStore",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: "Search here",
-                      prefixIcon: const Icon(Icons.search),
+                      prefixIcon: Icon(Icons.search),
                       border: border,
                       enabledBorder: border,
                       focusedBorder: border,
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                         label: Text(label),
                         backgroundColor: selectedFilter == label
                             ? Theme.of(context).colorScheme.primary
-                            : Color.fromRGBO(245, 248, 237, 1),
+                            : Color.fromRGBO(224, 224, 228, 1),
                         side: BorderSide(
                           color: Color.fromRGBO(245, 243, 250, 1),
                         ),
@@ -88,13 +88,16 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: product.length,
+                itemCount: products.length,
                 itemBuilder: (context, index) {
-                  final pro = product[index];
+                  final pro = products[index];
                   return ProductCard(
                     price: pro['price'] as int,
                     title: pro['title'] as String,
                     img: pro['image_url'] as String,
+                    bgcolor: index.isEven
+                        ? const Color.fromARGB(255, 192, 234, 237)
+                        : const Color.fromRGBO(220, 220, 220, 1),
                   );
                 },
               ),
