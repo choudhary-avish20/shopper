@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopper/home_page.dart';
-import 'package:shopper/product_page.dart';
-import 'package:shopper/global_variables.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "ShopPing",
-      home: ProductPage(product: products[0]),
+      home: HomePage(),
       //home: HomePage(),
       theme: ThemeData(
         fontFamily: "Lato",
