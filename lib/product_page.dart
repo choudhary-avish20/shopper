@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopper/cart_provider.dart';
 
 class ProductPage extends StatefulWidget {
   final Map<String, Object> product;
@@ -9,7 +11,27 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  String selectedSpec = "8/128";
+  String selectedSpec = "nAn";
+  void onTap() {
+    if (selectedSpec != "nAn") {
+      Provider.of<CartProvider>(context, listen: false).addProduct({
+        'id': widget.product['id'],
+        'title': widget.product['title'],
+        'brand': widget.product['brand'],
+        'price': widget.product['price'],
+        'specs': selectedSpec,
+        'image_url': widget.product['image_ulr'],
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Added to Cart!")));
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Select a Spec first")));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +90,9 @@ class _ProductPageState extends State<ProductPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      onTap();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       minimumSize: const Size(double.infinity, 50),
