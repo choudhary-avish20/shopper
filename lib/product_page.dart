@@ -20,7 +20,7 @@ class _ProductPageState extends State<ProductPage> {
         'brand': widget.product['brand'],
         'price': widget.product['price'],
         'specs': selectedSpec,
-        'image_url': widget.product['image_ulr'],
+        'image_url': widget.product['image_url'],
       });
       ScaffoldMessenger.of(
         context,

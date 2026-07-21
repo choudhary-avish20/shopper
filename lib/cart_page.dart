@@ -25,7 +25,49 @@ class CartPage extends StatelessWidget {
               ),
               subtitle: Text("Specs: ${cartItem['specs']}"),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Delete Phone",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        content: Text("Are you sure to remove the product?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Provider.of<CartProvider>(
+                                context,
+                                listen: false,
+                              ).remProduct(cartItem);
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              "Yes",
+                              style: TextStyle(
+                                color: Color.fromRGBO(0, 0, 0, 1),
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              "No",
+                              style: TextStyle(
+                                color: Color.fromRGBO(0, 0, 0, 1),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 icon: const Icon(Icons.delete),
                 color: Colors.deepOrangeAccent,
               ),
